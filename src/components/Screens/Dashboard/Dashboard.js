@@ -1,12 +1,14 @@
-import { StyleSheet, Text, View, Dimensions, TouchableOpacity, Image, ImageBackground } from 'react-native';
 import React from 'react';
+import { StyleSheet, Text, View, Dimensions, TouchableOpacity, Image, ImageBackground } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import CurrentWeather from '../../Weather/CurrentWeather';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-const Dashboard = (props) => {
+const Dashboard = (weather, isLoading, location) => {
 
-    const { navigation } = props
+    const navigation = useNavigation();
 
     return (
         <View style={styles.container}>
@@ -41,16 +43,29 @@ const Dashboard = (props) => {
             </View>
 
             <View style={{ flexDirection: 'row', marginTop: 65 }}>
-                <View style={styles.conleft}>
+                <View style={styles.containerleft}>
+                    <CurrentWeather
+                        weather={weather}
+                        isLoading={isLoading}
+                    />
 
                 </View>
 
 
-                <View style={styles.conright}>
+                <View style={styles.containerright}>
+                    <CurrentWeather
+                        weather={weather}
+                        isLoading={isLoading}
+                    />
 
                 </View>
             </View>
+
             <View style={styles.middleline}>
+
+            </View>
+
+            <View style={{ backgroundColor: '#FEB700', borderRadius: 25, height: 45, width: 45, position: 'absolute', marginTop: 210, marginLeft: 158 }}>
 
             </View>
         </View >
@@ -64,7 +79,7 @@ const styles = StyleSheet.create({
         width: windowWidth,
     },
 
-    conleft: {
+    containerleft: {
         height: 250,
         width: 171,
         backgroundColor: '#f2392e',
@@ -83,7 +98,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
     },
 
-    conright: {
+    containerright: {
         height: 250,
         width: 170,
         backgroundColor: '#FE0000',
