@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Dimensions, TouchableOpacity, Image, ImageBackground } from 'react-native';
+import { StyleSheet, View, Dimensions, TouchableOpacity, Image, ImageBackground } from 'react-native';
 import React from 'react';
 
 const windowWidth = Dimensions.get('window').width;
@@ -10,6 +10,8 @@ const Dashboard = (props) => {
 
     return (
         <View style={styles.container}>
+        <View style={{alignItems:'center',zIndex:1}}>
+
             <View style={{ flexDirection: 'row', marginTop: 80, marginHorizontal: 30 }}>
                 <TouchableOpacity onPress={() => navigation.navigate('MyFlock')}
                     style={styles.myfarm}>
@@ -40,6 +42,8 @@ const Dashboard = (props) => {
                 </TouchableOpacity>
             </View>
 
+        </View>
+
             <View style={{ flexDirection: 'row', marginTop: 65 }}>
                 <View style={styles.conleft}>
 
@@ -60,13 +64,12 @@ const Dashboard = (props) => {
 const styles = StyleSheet.create({
     container: {
         backgroundColor: '#ECECEC',
-        height: windowHeight,
-        width: windowWidth,
+        flex:1,
     },
 
     conleft: {
         height: 250,
-        width: 171,
+        width: '47%',
         backgroundColor: '#f2392e',
         borderTopRightRadius: 20,
         marginRight: 20,
@@ -76,8 +79,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#f2392e',
         height: 400,
         width: 8,
-        marginLeft: 177,
-        marginTop: 358,
+        marginLeft: 191,
+        marginTop: 350,
         borderTopLeftRadius: 8,
         borderTopRightRadius: 8,
         position: 'absolute',
@@ -85,7 +88,7 @@ const styles = StyleSheet.create({
 
     conright: {
         height: 250,
-        width: 170,
+        width: '49%',
         backgroundColor: '#FE0000',
         borderTopLeftRadius: 20,
     },
