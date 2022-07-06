@@ -7,16 +7,22 @@ import helper from '../../Weather/helper';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
-const Dashboard = (weather, isLoading, location) => {
+const Dashboard = () => {
 
     const navigation = useNavigation();
 
     const [weatherData,setWeatherData]=useState({});
+    const [isLoading,setLoading]=useState(false);
+
     
     useEffect(()=>{
         const getWeatherData=async()=>{
+            setLoading(true);
+
             const weatherData=await helper('Kathmandu');
             setWeatherData(weatherData);
+
+            setLoading(false);
         }
         
         getWeatherData();
@@ -62,7 +68,7 @@ const Dashboard = (weather, isLoading, location) => {
                 <View style={styles.containerleft}>
                     <CurrentWeather
                         weather={weatherData}
-                        isLoading={weatherData==={}}
+                        isLoading={isLoading}
                     />
 
                 </View>
@@ -71,7 +77,7 @@ const Dashboard = (weather, isLoading, location) => {
                 <View style={styles.containerright}>
                     <CurrentWeather
                         weather={weatherData}
-                        isLoading={weatherData==={}}
+                        isLoading={isLoading}
                     />
 
                 </View>

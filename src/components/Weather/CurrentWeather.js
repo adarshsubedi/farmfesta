@@ -2,15 +2,9 @@ import React from "react";
 import { StyleSheet, Text, View, Image, ActivityIndicator } from "react-native";
 
 export default function CurrentWeather({ weather, isLoading }) {
+    console.log(weather)
 
-    if (weather.message) {
-        return (
-            <View style={styles.isLoading}>
-                <ActivityIndicator size="large" color="#00B0FF" />
-                <Text>{weather?.message.toUpperCase()}</Text>
-            </View>
-        );
-    }else if (isLoading) {
+    if (isLoading) {
         return (
             <View style={styles.isLoading}>
                 <ActivityIndicator size="large" color="#00B0FF" />
@@ -22,19 +16,19 @@ export default function CurrentWeather({ weather, isLoading }) {
         <View style={styles.current}>
             <View style={styles.currentDataView}>
                 <Text style={styles.currentDescription}>
-                    {weather.city.toUpperCase()}
+                    {weather?.city?.toUpperCase()}
                 </Text>
                 <View style={{ flexDirection: "row" }}>
                     <Text style={styles.currentTemp}>
-                        {weather.current.temp}&deg;C
+                        {weather?.current?.temp}&deg;C
                     </Text>
                     <Image
                         style={styles.currentImg}
-                        source={{ uri: weather.current.icon }}
+                        source={{ uri: weather?.current?.icon }}
                     />
                 </View>
                 <Text style={styles.currentDescription}>
-                    {weather.current.description.toUpperCase()}
+                    {weather?.current?.description.toUpperCase()}
                 </Text>
             </View>
         </View>
