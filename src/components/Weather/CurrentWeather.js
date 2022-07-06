@@ -7,12 +7,10 @@ export default function CurrentWeather({ weather, isLoading }) {
         return (
             <View style={styles.isLoading}>
                 <ActivityIndicator size="large" color="#00B0FF" />
-                <Text>{weather.message.toUpperCase()}</Text>
+                <Text>{weather?.message.toUpperCase()}</Text>
             </View>
         );
-    }
-
-    if (isLoading) {
+    }else if (isLoading) {
         return (
             <View style={styles.isLoading}>
                 <ActivityIndicator size="large" color="#00B0FF" />
@@ -26,7 +24,7 @@ export default function CurrentWeather({ weather, isLoading }) {
                 <Text style={styles.currentDescription}>
                     {weather.city.toUpperCase()}
                 </Text>
-                <View style={{ flex: 1.5, flexDirection: "row" }}>
+                <View style={{ flexDirection: "row" }}>
                     <Text style={styles.currentTemp}>
                         {weather.current.temp}&deg;C
                     </Text>
@@ -50,7 +48,7 @@ const styles = StyleSheet.create({
     },
     current: {
         // flex: 2.5,
-        width: "100%",
+        // width: "100%",
     },
     currentDataView: {
         // flex: 1,
@@ -58,7 +56,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
     },
     currentTemp: {
-        fontSize: 40,
+        fontSize: 20,
     },
     currentDescription: {
         // flex: 1,

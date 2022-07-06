@@ -1,7 +1,8 @@
-import React from 'react';
+import React,{useEffect,useState} from 'react';
 import { StyleSheet, Text, View, Dimensions, TouchableOpacity, Image, ImageBackground } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import CurrentWeather from '../../Weather/CurrentWeather';
+import helper from '../../Weather/helper';
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -10,47 +11,58 @@ const Dashboard = (weather, isLoading, location) => {
 
     const navigation = useNavigation();
 
+    const [weatherData,setWeatherData]=useState({});
+    
+    useEffect(()=>{
+        const getWeatherData=async()=>{
+            const weatherData=await helper('Kathmandu');
+            setWeatherData(weatherData);
+        }
+        
+        getWeatherData();
+    },[]);
+
     return (
         <View style={styles.container}>
-        <View style={{alignItems:'center',zIndex:1}}>
+            <View style={{alignItems:'center',zIndex:1}}>
 
-            <View style={{ flexDirection: 'row', marginTop: 80, marginHorizontal: 30 }}>
-                <TouchableOpacity onPress={() => navigation.navigate('MyFlock')}
-                    style={styles.myfarm}>
-                    <ImageBackground source={require('../../images/hen.png')}
-                        style={{ height: 100, width: 70, alignSelf: 'center', marginTop: 30 }}>
-                    </ImageBackground>
-                </TouchableOpacity>
+                <View style={{ flexDirection: 'row', marginTop: 80, marginHorizontal: 30 }}>
+                    <TouchableOpacity onPress={() => navigation.navigate('MyFlock')}
+                        style={styles.myfarm}>
+                        <ImageBackground source={require('../../images/hen.png')}
+                            style={{ height: 100, width: 70, alignSelf: 'center', marginTop: 30 }}>
+                        </ImageBackground>
+                    </TouchableOpacity>
 
-                <TouchableOpacity style={styles.history}>
-                    <ImageBackground source={require('../../images/history.png')}
-                        style={{ height: 100, width: 70, alignSelf: 'center', marginTop: 30 }}>
-                    </ImageBackground>
-                </TouchableOpacity>
+                    <TouchableOpacity style={styles.history}>
+                        <ImageBackground source={require('../../images/history.png')}
+                            style={{ height: 100, width: 70, alignSelf: 'center', marginTop: 30 }}>
+                        </ImageBackground>
+                    </TouchableOpacity>
+                </View>
+
+
+                <View style={{ flexDirection: 'row', marginTop: 3, marginHorizontal: 30 }}>
+                    <TouchableOpacity style={styles.storage}>
+                        <ImageBackground source={require('../../images/storage.png')}
+                            style={{ height: 100, width: 70, alignSelf: 'center', marginTop: 30 }}>
+                        </ImageBackground>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={styles.resources}>
+                        <ImageBackground source={require('../../images/resources.png')}
+                            style={{ height: 100, width: 70, alignSelf: 'center', marginTop: 30 }}>
+                        </ImageBackground>
+                    </TouchableOpacity>
+                </View>
+
             </View>
-
-
-            <View style={{ flexDirection: 'row', marginTop: 3, marginHorizontal: 30 }}>
-                <TouchableOpacity style={styles.storage}>
-                    <ImageBackground source={require('../../images/storage.png')}
-                        style={{ height: 100, width: 70, alignSelf: 'center', marginTop: 30 }}>
-                    </ImageBackground>
-                </TouchableOpacity>
-
-                <TouchableOpacity style={styles.resources}>
-                    <ImageBackground source={require('../../images/resources.png')}
-                        style={{ height: 100, width: 70, alignSelf: 'center', marginTop: 30 }}>
-                    </ImageBackground>
-                </TouchableOpacity>
-            </View>
-
-        </View>
 
             <View style={{ flexDirection: 'row', marginTop: 65 }}>
                 <View style={styles.containerleft}>
                     <CurrentWeather
-                        weather={weather}
-                        isLoading={isLoading}
+                        weather={weatherData}
+                        isLoading={weatherData==={}}
                     />
 
                 </View>
@@ -58,8 +70,8 @@ const Dashboard = (weather, isLoading, location) => {
 
                 <View style={styles.containerright}>
                     <CurrentWeather
-                        weather={weather}
-                        isLoading={isLoading}
+                        weather={weatherData}
+                        isLoading={weatherData==={}}
                     />
 
                 </View>
@@ -69,7 +81,7 @@ const Dashboard = (weather, isLoading, location) => {
 
             </View>
 
-            <View style={{ backgroundColor: '#FEB700', borderRadius: 25, height: 45, width: 45, position: 'absolute', marginTop: 210, marginLeft: 158 }}>
+            <View style={{ backgroundColor: '#FEB700', borderRadius: 25, height: 45, width: 45, position: 'absolute', marginTop: 210, marginLeft: 175,zIndex:1 }}>
 
             </View>
         </View >
@@ -92,10 +104,10 @@ const styles = StyleSheet.create({
 
     middleline: {
         backgroundColor: '#f2392e',
-        height: 400,
+        height: 450,
         width: 8,
         marginLeft: 191,
-        marginTop: 350,
+        marginTop: 250,
         borderTopLeftRadius: 8,
         borderTopRightRadius: 8,
         position: 'absolute',
