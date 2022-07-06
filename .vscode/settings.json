@@ -1,6 +1,8 @@
 {
   "cSpell.words": [
     "btns",
+    "containerleft",
+    "containerright",
     "farmfesta",
     "Festa",
     "Govinda",
@@ -8,6 +10,7 @@
     "Noti",
     "Poudel",
     "shedicon",
+    "userimage",
     "usertoken"
   ],
   "java.configuration.updateBuildConfiguration": "interactive"
